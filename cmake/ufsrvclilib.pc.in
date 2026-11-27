@@ -1,0 +1,14 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/@CMAKE_INSTALL_LIBDIR@
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+
+Name: ufsrvclilib
+Description: Reusable client-side library for ufsrv class servers (transport, REST, protocol)
+Version: @UFSRVCLILIB_VERSION@
+Requires: ufsrvrxlib uflib
+Libs: -L${libdir} -lufsrvclilib
+# The vendored protobuf-c runtime is installed under a namespaced name so it
+# cannot be confused with a system libprotobuf-c.
+Libs.private: -lufsrvclilib_protobuf_c -lcurl -lssl -lcrypto -lutf8proc
+Cflags: -I${includedir}

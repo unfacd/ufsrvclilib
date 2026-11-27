@@ -1,0 +1,10 @@
+# Line endings: text is LF on disk regardless of core.autocrlf.
+#
+# The build runs src/version.c.sh directly (add_custom_target
+# ufsrvclilib_version), so a CRLF checkout makes the shebang
+# '#!/usr/bin/env bash\r' and the build fails before compiling anything.
+* text=auto eol=lf
+*.sh text eol=lf
+.gitattributes text eol=lf
+devops/git_mirror_exclusions.txt text eol=lf
+devops/git_last_mirror_commit_ids_registry.txt text eol=lf

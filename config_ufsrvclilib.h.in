@@ -1,0 +1,23 @@
+/**
+ * @file config_ufsrvclilib.h
+ * @brief Build-time configuration surface for ufsrvclilib.
+ *
+ * GENERATED from config_ufsrvclilib.h.in by CMake — do not edit the build copy.
+ * Installed alongside the public headers so consumers can query how the library
+ * was built: version, linkage flavour, and the optional capabilities compiled in.
+ */
+#ifndef UFSRVCLILIB_CONFIG_H
+#define UFSRVCLILIB_CONFIG_H
+
+#define UFSRVCLILIB_CONFIG_VERSION       "@UFSRVCLILIB_VERSION@"
+#define UFSRVCLILIB_CONFIG_BUILT_SHARED  @UFSRVCLILIB_BUILT_SHARED@
+
+#define UFSRVCLILIB_DEBUG_BUILD    @UFSRVCLILIB_DEBUG_BUILD@   /* 1 for Debug builds, or when a verbosity level is on */
+#define UFSRVCLILIB_DEBUG_BUILD_L2 @UFSRVCLILIB_DEBUG_L2@      /* level-2 verbose tracing */
+#define UFSRVCLILIB_DEBUG_BUILD_L3 @UFSRVCLILIB_DEBUG_L3@      /* level-3 per-object tracing */
+
+#cmakedefine UFSRVCLILIB_WITH_PROTOBUF_C 1
+#cmakedefine UFSRVCLILIB_WITH_CURL       1
+#cmakedefine UFSRVCLILIB_WITH_OPENSSL    1
+
+#endif /* UFSRVCLILIB_CONFIG_H */

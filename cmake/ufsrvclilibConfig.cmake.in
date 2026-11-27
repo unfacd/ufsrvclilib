@@ -1,0 +1,28 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# uflib is a public dependency (its headers appear in ours) and CURL/OpenSSL are
+# on the public link line, so a consumer needs them resolved before the targets
+# file is included.
+find_dependency(ufsrvrxlib)
+find_dependency(uflib)
+find_dependency(CURL)
+find_dependency(OpenSSL)
+
+include("${CMAKE_CURRENT_LIST_DIR}/ufsrvclilibTargets.cmake")
+
+# Exported targets cannot carry an alias, so the canonical name is created here.
+# BUILD_SHARED_LIBS=ON  → ufsrvclilib::ufsrvclilib_shared (dynamic)
+# BUILD_SHARED_LIBS=OFF → ufsrvclilib::ufsrvclilib_static
+if(NOT TARGET ufsrvclilib::ufsrvclilib)
+    if(TARGET ufsrvclilib::ufsrvclilib_shared)
+        add_library(ufsrvclilib::ufsrvclilib ALIAS ufsrvclilib::ufsrvclilib_shared)
+    elseif(TARGET ufsrvclilib::ufsrvclilib_static)
+        add_library(ufsrvclilib::ufsrvclilib ALIAS ufsrvclilib::ufsrvclilib_static)
+    else()
+        message(FATAL_ERROR "Neither ufsrvclilib::ufsrvclilib_shared nor ufsrvclilib::ufsrvclilib_static found in ufsrvclilibTargets.cmake")
+    endif()
+endif()
+
+set(ufsrvclilib_LIBRARIES ufsrvclilib::ufsrvclilib)
